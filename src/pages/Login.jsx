@@ -4,13 +4,14 @@ import Logo from "../assets/kv-login.jpeg";
 import KV_logo from "../assets/kv logo.png";
 import "./styles.scss";
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ handleSubmit }) => {
+const Login = () => {
    const [userName, setUserName] = useState("");
    const [error, setError] = useState("");
    const [password, setPassword] = useState("");
-
    useEffect(() => {
+      localStorage.setItem("logged",false)
       userRef.current.focus();
       if (userName.length > 10) {
          setError("Max Length Exceeded");
@@ -19,19 +20,19 @@ const Login = ({ handleSubmit }) => {
       }
       console.log(userName);
    }, [userName]);
-   // const handleUserName = ({text}) => {
-   //    setUserName({text});
-   // };
+   const navigate = useNavigate();
 
-   // const handleSubmit= (e) => {
-   //    e.preventDefault();
-   // };
+   const handleSubmit = (e) => {
+      // console.log(props);
+      e.preventDefault();
+      if (userName == "sanoj" && password == "hi") {
+         // setState(true);
+         localStorage.setItem("logged",true)
+         navigate("/employees");
+      }
+   };
    const userRef = useRef();
 
-   const loginn = (e) => {
-      e.preventDefault();
-      handleSubmit({ username: userName, password: password });
-   };
    return (
       <div className="loginPage">
          {/* <!-- Hero Section --> */}
@@ -54,7 +55,7 @@ const Login = ({ handleSubmit }) => {
                   onChange={setUserName}
                />
                <TextField label="Password" type="password" className="" onChange={setPassword} />
-               <Button text="Login" handleClick={loginn} className="" />
+               <Button text="Login" handleClick={handleSubmit} className="" />
             </form>
          </div>
       </div>

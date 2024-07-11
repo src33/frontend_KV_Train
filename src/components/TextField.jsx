@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { forwardRef } from "react";
 const TextField = forwardRef((props,ref) => {
-   //    console.log(props);
 
-   // const [text, setText] = useState("");
-   // const [error, setError] = useState("");
-   // useEffect(() => {
-   //    // console.log(text);
-   //    if (text.length > 10) {
-   //       setError("Max Length Exceeded");
-   //    } else {
-   //       setError("");
-   //    }
-   // }, [text]);
    const onChange = (e) => {
       // setText(e.target.value);
       if (props.onChange) props.onChange(e.target.value,props.label);

@@ -1,0 +1,117 @@
+.EmployeeList {
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Nunito", sans-serif;
+   }
+   width: calc(100vw - 300px);
+   height: calc(100vh - 90px);
+   position: absolute;
+   right: 0;
+   padding-top: 15px;
+   padding-right: 15px;
+   padding-left: 15px;
+   background-color: #fafafa;
+
+   .heading {
+      margin-top: 90px;
+      position: fixed;
+      background-color: white;
+      height: 100px;
+      width: calc(100vw - 330px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* border: 1px solid black; */
+      border-radius: 10px;
+      padding-left: 30px;
+      padding-right: 30px;
+      box-shadow: 2px 5px 8px -2px #dfdfdf;
+
+      .listLabel {
+         font-size: 22px;
+         font-weight: 600;
+      }
+
+      .createBttnSectn {
+         display: flex;
+         flex-direction: row;  
+         text-align: center;
+         height: 53px;
+         border-radius: 28px;
+         background-color: #eaf9ff;
+         align-items: center;
+         text-decoration: none;
+         .createBttn {
+            width: 55px;
+            height: 55px;
+            border-radius: 100%;
+            font-size: 20px;
+            text-align: center;
+            align-content: center;
+            background-color: #03aeee;
+            color: white;
+         }
+         .createBttnLbl {
+            padding-left: 12px;
+            padding-right: 20px;
+            height: 40px;
+            font-size: 15px;
+            text-align: center;
+            align-content: center;
+            color: black;
+         }
+      }
+   }
+   .EmployeeDataHeader,
+   .EmployeeData {
+      
+      background-color: white;
+      font-size: 14px;
+      height: 60px;
+      // width: 200px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-column-gap: 20px;
+      align-items: center;
+      /* border: 1px solid black; */
+      border-radius: 10px;
+      text-align: left;
+      padding-left: 30px;
+   }
+   .EmployeeDataHeader {
+      margin-top: 202px;
+      
+      font-weight: 600;
+      background-color: #eaf9ff;
+   }
+   .EmployeeData {
+      margin-top: 12px;
+      box-shadow: 2px 5px 8px -2px #dfdfdf;
+      .name,
+      .id,
+      .role {
+         overflow: hidden;
+      }
+      .status {
+         height: 30px;
+         width: 100px;
+         border-radius: 20px;
+         text-align: center;
+         align-content: center;
+      }
+      .action {
+         // text-align: center;
+         display: flex;
+         flex-direction: row;
+         gap: 15px;
+         justify-content: left;
+      }
+      .delete-icon,
+      .edit-icon {
+         width: auto;
+         height: 20px;
+      }
+   }
+}

@@ -1,9 +1,8 @@
 import "./createEmployeeStyles.scss";
-// import KV_logo from "../assets/kv logo.png";
 import TextField from "../components/TextField";
 import Button from "../components/Buttons";
 import Select from "../components/Select";
-import { useEffect, useRef, useState } from "react";
+import { useEffect,  useState } from "react";
 
 const CreateEmployee = () => {
    const form_fields = [
@@ -61,14 +60,7 @@ const CreateEmployee = () => {
 
    return (
       <main className="createEmployee">
-         {/* <aside>
-            <div className="details">
-               <div className="icon">
-                  <img src="icon.svg" alt="icon" className="imgicon" />
-               </div>
-               <label>Employee List</label>
-            </div>
-         </aside> */}
+      
          <div className="list">
             <div className="heading">Create Employee</div>
             <form action="">
