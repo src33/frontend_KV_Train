@@ -36,7 +36,7 @@
 
       .createBttnSectn {
          display: flex;
-         flex-direction: row;  
+         flex-direction: row;
          text-align: center;
          height: 53px;
          border-radius: 28px;
@@ -63,10 +63,31 @@
             color: black;
          }
       }
+      .createAndFilter {
+         display: flex;
+         flex-direction: row;
+         gap: 40px;
+
+         .Status{
+            display: flex;
+            flex-direction: row;
+            gap:10px;
+            align-items: center;
+            select{
+               background-color: #eaf9ff;
+               border: none;
+               text-align: center;
+               height: 30px;
+               width: 120px;
+               border-radius: 20px;
+               // padding-right: 20px;
+            
+            }
+         }
+      }
    }
    .EmployeeDataHeader,
    .EmployeeData {
-      
       background-color: white;
       font-size: 14px;
       height: 60px;
@@ -82,7 +103,7 @@
    }
    .EmployeeDataHeader {
       margin-top: 202px;
-      
+
       font-weight: 600;
       background-color: #eaf9ff;
    }
@@ -114,4 +135,9 @@
          height: 20px;
       }
    }
+   .detailsLink{
+      text-decoration: none;
+      color: black;
+   }
+
 }

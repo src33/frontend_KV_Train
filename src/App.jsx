@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-d
 import NotFound from "./pages/NotFound";
 import HomeLayout from "./layouts/HomeLayout";
 import EmployeeList from "./pages/EmployeeList";
+import EditEmployee from "./pages/EditEmployee";
+import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 
 const router = createBrowserRouter([
    {
@@ -19,6 +21,8 @@ const router = createBrowserRouter([
       children: [
          { index: true, element: <EmployeeList /> },
          { path: "create", element: <CreateEmployee /> },
+         {path: "edit/:id", element: <EditEmployee /> },
+         {path: "details/:id", element: <EmployeeDetailsPage/>}
       ],
    },
 ]);

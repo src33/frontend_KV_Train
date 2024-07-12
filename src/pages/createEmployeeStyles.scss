@@ -24,6 +24,7 @@
          height: 100px;
          display: flex;
          align-items: center;
+         margin-top: 90px;
          /* border: 1px solid black; */
          border-radius: 10px;
          padding-left: 30px;
@@ -48,6 +49,9 @@
          /* width: 30%; */
          height: 40px;
          background-color: #fafafa;
+      }
+      .fields:disabled{
+         background-color: #6b61619f;
       }
       .fields {
          display: flex;
@@ -93,6 +97,4 @@
          color: #777777;
       }
    }
-
-   
 }

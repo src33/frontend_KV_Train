@@ -1,18 +1,8 @@
-// import { Link, Outlet } from "react-router-dom";
-import trash_icon from "../assets/trash.svg";
-import edit_icon from "../assets/pen.svg";
-import EmployeeDetail from "../components/EmployeeDetail";
 import "./employeeListStyles.scss";
-import { Link } from "react-router-dom";
-import Select from "../components/Select";
-import { useState } from "react";
-const EmployeeList = () => {
-   const [filter, setFilter] = useState("All");
-
-   const style = {
-      marginLeft: "310px",
-      textALign: "center",
-   };
+import "./employeeDetailsPage.scss";
+import { Link, useParams } from "react-router-dom";
+import Status from "../components/Status";
+const EmployeeDetailsPage = () => {
    const employees = [
       {
          name: "Shaheen",
@@ -127,45 +117,56 @@ const EmployeeList = () => {
          experience: "2 years",
       },
    ];
+   const data = useParams();
    return (
-      <div className="EmployeeList" style={style}>
-         {/* <div className="listHeader"> */}
+      <div className="EmployeeList">
          <div className="heading">
-            <div className="listLabel">Employee List</div>
+            <div className="listLabel">Employee Details</div>
             <div className="createAndFilter">
-
-                  <Select
-                     label="Filter by"
-                     className="Status"
-                     values={[{ value: "All" }, { value: "Active" }, { value: "Inactive" }, { value: "Probation" }]}
-                     onSelect={setFilter}
-                  />
-      
-               <Link to="create" className="createBttnSectn">
+               <Link to={`/employees/edit/${data.id}`} className="createBttnSectn">
                   <div className="createBttn">+</div>
-                  <div className="createBttnLbl">Create employee</div>
+                  <div className="createBttnLbl">Edit</div>
                </Link>
             </div>
          </div>
-
-         {/* </div> */}
-
-         <div className="EmployeeDataHeader">
-            <div className="name">Employee Name</div>
-            <div className="id">Employee ID</div>
-            <div className="date">Joining Date</div>
-            <div className="role">Role</div>
-            <div className="status">Status</div>
-            <div className="experience">Experience</div>
-            <div className="action">Action</div>
-         </div>
-         <div className="EmployeeDataList">
-            {employees.filter(field => (filter==="All")? field: field.status===filter).map((field) => {
-               // console.log(field.status);
-               return  <EmployeeDetail key={field.id} {...field} />
-            })}
+         <div className="detailsContentComponent">
+            {employees
+               .filter((field) => field.id === data.id)
+               .map((field) => {
+                  return (
+                     <div className="detailsContent">
+                        <div className="name">
+                           <label className="labelDetails">Employee Name</label>
+                           <div className="Content"> {field.name}</div>
+                        </div>
+                        <div className="id">
+                           <label className="labelDetails">Employee ID</label>
+                           <div className="Content">{field.id}</div>
+                        </div>
+                        <div className="date">
+                           <label className="labelDetails">Joining Date</label>
+                           <div className="Content"> {field.date}</div>
+                        </div>
+                        <div className="role">
+                           <label className="labelDetails"> Role</label>
+                           <div className="Content"> {field.role}</div>
+                        </div>
+                        <div className="statusField">
+                           <label className="labelDetails">Status</label>
+                           <div className="Content">
+                              <Status statusVal={field.status} />
+                           </div>
+                        </div>
+                        <div className="row-border"></div>
+                        <div className="experience">
+                           <label className="labelDetails">Experience </label>
+                           <div className="Content">{field.experience}</div>
+                        </div>
+                     </div>
+                  );
+               })}
          </div>
       </div>
    );
 };
-export default EmployeeList;
+export default EmployeeDetailsPage;

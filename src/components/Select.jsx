@@ -8,7 +8,7 @@ const Select = (props) => {
          <label htmlFor={props.label}> {props.label} </label>
          <select required defaultValue="default" onChange={onSelect}>
             <option value="default" disabled>
-               Choose {props.label}
+               {props.className}
             </option>
             {props.values.map((element) => {
                // console.log(element.value)
