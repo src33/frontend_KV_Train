@@ -15,7 +15,9 @@
       padding-top: 15px;
       padding-right: 15px;
       padding-left: 15px;
+      margin-top: 90px;
       background-color: #fafafa;
+      z-index: -1;
 
       .heading {
          background-color: white;
@@ -24,7 +26,7 @@
          height: 100px;
          display: flex;
          align-items: center;
-         margin-top: 90px;
+         // margin-top: 90px;
          /* border: 1px solid black; */
          border-radius: 10px;
          padding-left: 30px;
@@ -50,8 +52,8 @@
          height: 40px;
          background-color: #fafafa;
       }
-      .fields:disabled{
-         background-color: #6b61619f;
+      .fields input:disabled{
+        background-color: #6b61619f;
       }
       .fields {
          display: flex;
@@ -70,10 +72,11 @@
          border: 1px solid #ccc;
          outline: none;
       }
-      .buttons {
+      .formButtons {
          display: flex;
          flex-direction: row;
          width: 100%;
+         text-decoration: none;
       }
       .Create,
       .Cancel {

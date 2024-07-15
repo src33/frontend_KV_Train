@@ -2,14 +2,13 @@ import TextField from "../components/TextField";
 import Button from "../components/Buttons";
 import Select from "../components/Select";
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 const Form = (props) => {
    const [form, setField] = useState(props.defaultVal);
-   const [changed, setChange] = useState({});
+   // const [changed, setChange] = useState({});
    useEffect(() => {
-      handleChange();
-      console.log(form);
-   }, [changed]);
+      console.log(form)
+   }, [form]);
    const form_fields = [
       {
          name: "Employee Name",
@@ -20,7 +19,7 @@ const Form = (props) => {
          id: "id",
          name: "Employee ID",
          type: "text",
-         disabled:"true"
+         disabled: "true",
       },
       {
          id: "date",
@@ -56,10 +55,16 @@ const Form = (props) => {
          type: "text",
       },
    ];
-   const handleChange = () => {
+   const handleChange = (changed) => {
       setField((prevState) => {
          return { ...prevState, ...changed };
       });
+   };
+
+   const onCreateOrEdit = (e) => {
+      // e.preventDefault();
+      console.log("form");
+      props.handleCreateOrEdit(form);
    };
    return (
       <form action="">
@@ -68,7 +73,9 @@ const Form = (props) => {
             .map((field) => {
                // console.log(field.name);
                // console.log(field.name)
+              
                if (field.Component)
+         
                   return (
                      <field.Component
                         key={field.name}
@@ -76,7 +83,7 @@ const Form = (props) => {
                         label={field.name}
                         values={field.values}
                         className="fields"
-                        onSelect={(value) => setChange({ [field.id]: value })}
+                        onSelect={(value) => handleChange({ [field.id]: value })}
                      />
                   );
                else if (field.disabled)
@@ -96,14 +103,17 @@ const Form = (props) => {
                      label={field.name}
                      type={field.type}
                      className="fields"
-                     onChange={(value) => setChange({ [field.id]: value })}
+                     value={props.defaultVal[field.id]}
+                     onChange={(value) => handleChange({ [field.id]: value })}
                   />
                );
             })}
-         <div className="buttons">
-            <Button text="Create" className="Create" />
-            <Button text="Cancel" className="Cancel" />
-         </div>
+         {/* <div className="buttons"> */}
+            <Link to="/employees" className="formButtons">
+               <Button text="Create" className="Create" handleClick={onCreateOrEdit} />
+               <Button text="Cancel" className="Cancel" />
+            </Link>
+         {/* </div> */}
       </form>
    );
 };

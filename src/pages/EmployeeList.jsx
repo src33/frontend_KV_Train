@@ -3,144 +3,42 @@ import trash_icon from "../assets/trash.svg";
 import edit_icon from "../assets/pen.svg";
 import EmployeeDetail from "../components/EmployeeDetail";
 import "./employeeListStyles.scss";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import Select from "../components/Select";
 import { useState } from "react";
+import { actionTypes } from "../store/useReducer";
+
 const EmployeeList = () => {
+   const {state, dispatch} = useOutletContext();
    const [filter, setFilter] = useState("All");
 
    const style = {
       marginLeft: "310px",
       textALign: "center",
    };
-   const employees = [
-      {
-         name: "Shaheen",
-         id: "shaheen@fun.com",
-         date: "2021-09-01",
-         role: "Software Developer",
-         status: "Active",
-         experience: "2 years",
-      },
-      {
-         name: "Alex",
-         id: "alex@company.com",
-         date: "2020-08-15",
-         role: "Project Manager",
-         status: "Inactive",
-         experience: "5 years",
-      },
-      {
-         name: "Jordan",
-         id: "jordan@tech.com",
-         date: "2019-04-22",
-         role: "UI/UX Designer",
-         status: "Active",
-         experience: "3 years",
-      },
-      {
-         name: "Casey",
-         id: "casey@innovate.com",
-         date: "2022-01-10",
-         role: "Marketing Specialist",
-         status: "Active",
-         experience: "1 year",
-      },
-      {
-         name: "Morgan",
-         id: "morgan@develop.com",
-         date: "2018-07-19",
-         role: "Backend Developer",
-         status: "Inactive",
-         experience: "4 years",
-      },
-      {
-         name: "Jamie",
-         id: "jamie@create.com",
-         date: "2021-03-03",
-         role: "Frontend Developer",
-         status: "Probation",
-         experience: "2 years",
-      },
-      {
-         name: "Taylor",
-         id: "taylor@solution.com",
-         date: "2020-11-12",
-         role: "Data Analyst",
-         status: "Active",
-         experience: "2 years",
-      },
-      {
-         name: "Drew",
-         id: "drew@enterprise.com",
-         date: "2019-06-08",
-         role: "System Administrator",
-         status: "Active",
-         experience: "3 years",
-      },
-      {
-         name: "Pat",
-         id: "pat@network.com",
-         date: "2022-02-20",
-         role: "Network Engineer",
-         status: "Probation",
-         experience: "1 year",
-      },
-      {
-         name: "Joan",
-         id: "jordan@te.com",
-         date: "2019-04-22",
-         role: "UI/UX Designer",
-         status: "Active",
-         experience: "3 years",
-      },
-      {
-         name: "Casy",
-         id: "casey@innoe.com",
-         date: "2022-01-10",
-         role: "Marketing Specialist",
-         status: "Active",
-         experience: "1 year",
-      },
-      {
-         name: "Mon",
-         id: "morgan@deop.com",
-         date: "2018-07-19",
-         role: "Backend Developer",
-         status: "Probation",
-         experience: "4 years",
-      },
-      {
-         name: "Jame",
-         id: "jame@create.com",
-         date: "2021-03-03",
-         role: "Frontend Developer",
-         status: "Active",
-         experience: "2 years",
-      },
-      {
-         name: "Sam",
-         id: "sam@cloud.com",
-         date: "2021-05-16",
-         role: "Cloud Solutions Architect",
-         status: "Active",
-         experience: "2 years",
-      },
-   ];
+   console.log(state);
+   const handleDelete = (value) => {
+      console.log(`kityyo ${value.id}`);
+
+      dispatch({
+         type: actionTypes.DELETE_EMPLOYEE,
+         payload: value.id,
+      });
+   };
+
    return (
       <div className="EmployeeList" style={style}>
          {/* <div className="listHeader"> */}
          <div className="heading">
             <div className="listLabel">Employee List</div>
             <div className="createAndFilter">
+               <Select
+                  label="Filter by"
+                  className="Status"
+                  values={[{ value: "All" }, { value: "Active" }, { value: "Inactive" }, { value: "Probation" }]}
+                  onSelect={setFilter}
+               />
 
-                  <Select
-                     label="Filter by"
-                     className="Status"
-                     values={[{ value: "All" }, { value: "Active" }, { value: "Inactive" }, { value: "Probation" }]}
-                     onSelect={setFilter}
-                  />
-      
                <Link to="create" className="createBttnSectn">
                   <div className="createBttn">+</div>
                   <div className="createBttnLbl">Create employee</div>
@@ -160,10 +58,12 @@ const EmployeeList = () => {
             <div className="action">Action</div>
          </div>
          <div className="EmployeeDataList">
-            {employees.filter(field => (filter==="All")? field: field.status===filter).map((field) => {
-               // console.log(field.status);
-               return  <EmployeeDetail key={field.id} {...field} />
-            })}
+            {state.employees
+               .filter((field) => (filter === "All" ? field : field.status === filter))
+               .map((field) => {
+                  // console.log(field.status);
+                  return <EmployeeDetail key={field.id} {...field} handleDelete={(value) => handleDelete(value)} />;
+               })}
          </div>
       </div>
    );

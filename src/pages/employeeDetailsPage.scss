@@ -1,5 +1,5 @@
 .detailsContent {
-   margin-top: 210px;
+   margin-top: 120px;
    background-color: white;
    box-shadow: 2px 5px 8px -2px #dfdfdf;
    border-radius: 10px;
@@ -8,9 +8,10 @@
    grid-template-columns: repeat(5, 1fr);
    gap: 10px;
    row-gap: 40px;
-    .statusField{
-        text-align: left;
-    }
+
+   .statusField {
+      text-align: left;
+   }
    .status {
       height: 25px;
       width: 100px;
@@ -24,14 +25,18 @@
       align-content: center;
       height: 25px;
       text-align: left;
+      overflow: visible;
    }
-   .labelDetails{
-    font-size: 15px;
-    color: rgb(122, 122, 122);
+   .labelDetails {
+      font-size: 15px;
+      color: rgb(122, 122, 122);
    }
-   .row-border{
-    grid-column: 1/6;
-    border-top: 1px solid rgb(230, 230, 230);
-  
+   .row-border {
+      grid-column: 1/6;
+      border-top: 1px solid rgb(230, 230, 230);
    }
+}
+.edit-icon {
+   width: auto;
+   height: 18px;
 }

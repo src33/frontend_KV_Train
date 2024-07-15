@@ -1,5 +1,6 @@
 import "./employeeListStyles.scss";
 import "./employeeDetailsPage.scss";
+import edit_icon from "../assets/penEdit.svg";
 import { Link, useParams } from "react-router-dom";
 import Status from "../components/Status";
 const EmployeeDetailsPage = () => {
@@ -124,7 +125,9 @@ const EmployeeDetailsPage = () => {
             <div className="listLabel">Employee Details</div>
             <div className="createAndFilter">
                <Link to={`/employees/edit/${data.id}`} className="createBttnSectn">
-                  <div className="createBttn">+</div>
+                  <div className="createBttn">
+                     <img src={edit_icon} alt="edit-icon" className="edit-icon" />
+                  </div>
                   <div className="createBttnLbl">Edit</div>
                </Link>
             </div>

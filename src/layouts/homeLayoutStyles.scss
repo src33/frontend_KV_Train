@@ -39,11 +39,15 @@
    top: 90px;
    background-color: white;
    box-shadow: 5px 0 3px -4px #dfdfdf;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   padding-top: 25px;
    .links {
       text-decoration: none;
    }
    .details {
-      margin-top: 25px;
+      margin-bottom: 25px;
       margin-left: 10px;
       width: 290px;
       height: 55px;
