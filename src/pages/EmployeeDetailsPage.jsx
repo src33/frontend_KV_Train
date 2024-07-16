@@ -22,9 +22,6 @@ const EmployeeDetailsPage = () => {
       experience: data.age,
    };
    console.log(data);
-   // setDetail(employee);
-   // }, [employeeDetail]);
-
    return (
       <div className="EmployeeList">
          <div className="heading">

@@ -12,11 +12,34 @@ export const employeeApi = apiWithTag.injectEndpoints({
             method: "POST",
             body,
          }),
+         invalidatesTags: ["EMPLOYEE_LIST"],
       }),
       getEmployeeDetails: builder.query({
          query: (id) => `/employee/${id}`,
       }),
+      updateEmployee: builder.mutation({
+         query: (payload) => ({
+            url: `/employee/${payload.id}`,
+            method: "PUT",
+            body: payload,
+         }),
+         invalidatesTags: ["EMPLOYEE_LIST"],
+      }),
+      deleteEmployee: builder.mutation({
+         query: (id) => ({
+            url: `/employee/${id}`,
+            method: "DELETE",
+            body: id,
+         }),
+         invalidatesTags: ["EMPLOYEE_LIST"],
+      }),
    }),
 });
 
-export const { useGetEmployeeListQuery, useAddEmployeeMutation, useGetEmployeeDetailsQuery } = employeeApi;
+export const {
+   useGetEmployeeListQuery,
+   useAddEmployeeMutation,
+   useGetEmployeeDetailsQuery,
+   useUpdateEmployeeMutation,
+   useDeleteEmployeeMutation,
+} = employeeApi;
