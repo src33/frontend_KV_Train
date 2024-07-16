@@ -2,14 +2,14 @@
 import { forwardRef, useState } from "react";
 const TextField = forwardRef((props, ref) => {
    const [disabled, setDisabled] = useState(false);
-   const [defVal, setDefVal] = useState(props.value);
+   const [defVal, setDefVal] = useState(props.value || "");
    if (props.disabled === "true") {
       setDisabled(true);
    }
    const onChange = (e) => {
       // setText(e.target.value);
       setDefVal(e.target.value);
-      console.log(props.disabled);
+      // console.log(props.disabled);
       if (props.onChange) props.onChange(e.target.value, props.label);
    };
    // console.log(props.disabled)

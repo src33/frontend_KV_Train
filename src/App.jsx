@@ -9,10 +9,9 @@ import EmployeeList from "./pages/EmployeeList";
 import EditEmployee from "./pages/EditEmployee";
 import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
 import DeletePopup from "./components/DeletePopup";
-
+import store from "./store/store";
+import { Provider } from "react-redux";
 const App = () => {
-   // const [stateValue, setState] = useState(false);
-  
    const router = createBrowserRouter([
       {
          path: "/",
@@ -32,10 +31,12 @@ const App = () => {
    ]);
 
    return (
+      <Provider store={store}>
       <main className="App">
          <RouterProvider router={router} />
          {/* {stateValue ? <CreateEmployee /> : <Login handleSubmit={handleClick} />} */}
       </main>
+      </Provider>
    );
 };
 export default App;

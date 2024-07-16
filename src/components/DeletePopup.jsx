@@ -8,14 +8,14 @@ const DeletePopup = (props) => {
       e.preventDefault();
       props.onConfirm(true);
    };
-   const onCancel=(e)=>{
-      e.preventDefault()
-      props.onConfirm(false)
-   }
+   const onCancel = (e) => {
+      e.preventDefault();
+      props.onConfirm(false);
+   };
    return (
       <div className="deletePopup">
          <div className="popupContent">
-            <p className="closeBttn" onClick={onCancel} > 
+            <p className="closeBttn" onClick={onCancel}>
                X
             </p>
             <h2>Are you sure?</h2>
@@ -27,7 +27,7 @@ const DeletePopup = (props) => {
                <Button className="Confirm" text="Confirm" handleClick={onConfirm} />
 
                {/* </button> */}
-               <Button className="Cancel" text="Cancel" handleClick={onCancel}/>
+               <Button className="Cancel" text="Cancel" handleClick={onCancel} />
 
                {/* </button> */}
             </div>

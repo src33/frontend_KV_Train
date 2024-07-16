@@ -7,7 +7,7 @@ const Form = (props) => {
    const [form, setField] = useState(props.defaultVal);
    // const [changed, setChange] = useState({});
    useEffect(() => {
-      console.log(form)
+      // console.log(form)
    }, [form]);
    const form_fields = [
       {
@@ -35,7 +35,7 @@ const Form = (props) => {
       {
          id: "role",
          name: "Role",
-         values: [{ value: "Dev" }, { value: "Design" }],
+         values: [{ value: "Dev" }, { value: "UI" }],
          Component: Select,
       },
       {
@@ -63,7 +63,7 @@ const Form = (props) => {
 
    const onCreateOrEdit = (e) => {
       // e.preventDefault();
-      console.log("form");
+      // console.log("form");
       props.handleCreateOrEdit(form);
    };
    return (
@@ -71,11 +71,7 @@ const Form = (props) => {
          {form_fields
             .filter((field) => form.hasOwnProperty(field.id))
             .map((field) => {
-               // console.log(field.name);
-               // console.log(field.name)
-              
                if (field.Component)
-         
                   return (
                      <field.Component
                         key={field.name}
@@ -109,10 +105,10 @@ const Form = (props) => {
                );
             })}
          {/* <div className="buttons"> */}
-            <Link to="/employees" className="formButtons">
-               <Button text="Create" className="Create" handleClick={onCreateOrEdit} />
-               <Button text="Cancel" className="Cancel" />
-            </Link>
+         <Link to="/employees" className="formButtons">
+            <Button text="Create" className="Create" handleClick={onCreateOrEdit} />
+            <Button text="Cancel" className="Cancel" />
+         </Link>
          {/* </div> */}
       </form>
    );

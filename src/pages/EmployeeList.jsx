@@ -1,29 +1,43 @@
-// import { Link, Outlet } from "react-router-dom";
-import trash_icon from "../assets/trash.svg";
-import edit_icon from "../assets/pen.svg";
 import EmployeeDetail from "../components/EmployeeDetail";
 import "./employeeListStyles.scss";
 import { Link, useOutletContext } from "react-router-dom";
 import Select from "../components/Select";
-import { useState } from "react";
-import { actionTypes } from "../store/useReducer";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteEmployee } from "../store/employeeReducer";
+import { useGetEmployeeListQuery } from "./employee.api";
 
 const EmployeeList = () => {
-   const {state, dispatch} = useOutletContext();
+   // const {dispatch} = useOutletContext();
    const [filter, setFilter] = useState("All");
+   // const employees = useSelector((state) => state.employee.list);
+   const [list, setList] = useState([]);
+   const dispatch = useDispatch();
+   const { data = [] } = useGetEmployeeListQuery();
+
+   useEffect(() => {
+      const employees = data.map((employee) => ({
+         ...employee,
+         date: new Date(employee.createdAt).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+         }),
+         status:"Active",
+         experience:employee.age
+      }));
+      // console.log()
+      setList(employees)
+   },[data]);
 
    const style = {
       marginLeft: "310px",
       textALign: "center",
    };
-   console.log(state);
    const handleDelete = (value) => {
       console.log(`kityyo ${value.id}`);
 
-      dispatch({
-         type: actionTypes.DELETE_EMPLOYEE,
-         payload: value.id,
-      });
+      dispatch(deleteEmployee(value.id));
    };
 
    return (
@@ -58,7 +72,7 @@ const EmployeeList = () => {
             <div className="action">Action</div>
          </div>
          <div className="EmployeeDataList">
-            {state.employees
+            {list
                .filter((field) => (filter === "All" ? field : field.status === filter))
                .map((field) => {
                   // console.log(field.status);

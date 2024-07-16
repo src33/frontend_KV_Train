@@ -4,7 +4,7 @@ import icon from "../assets/icon.svg";
 import ".//homeLayoutStyles.scss";
 import KV_logo from "../assets/kv logo.png";
 import { useEffect } from "react";
-import reducer from "../store/useReducer.js"
+import reducer from "../store/useReducer.js";
 
 const HomeLayout = () => {
    const navigate = useNavigate();
@@ -122,15 +122,14 @@ const HomeLayout = () => {
          experience: "2 years",
       },
    ];
-   const [state,dispatch] = useReducer(reducer,{employees:employees, filter:"All"})
+   const [state, dispatch] = useReducer(reducer, { employees: employees, filter: "All" });
    useEffect(() => {
-      console.log(localStorage.getItem("logged"));
-      const token = localStorage.getItem("logged");
-      if (!token || token !== "true") {
-         console.log(localStorage.getItem("logged"));
+      // console.log(localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      if (!token || token === "false") {
+         console.log("token Not available");
          navigate("/");
-      
-      }else navigate("/employees")
+      } else navigate("/employees");
    }, []);
 
    return (
@@ -141,7 +140,7 @@ const HomeLayout = () => {
             </div>
             <h1>Employee</h1>
          </div>
-         <aside className="SideBar"> 
+         <aside className="SideBar">
             <Link className="links">
                <div className="details">
                   <div className="icon">
@@ -161,7 +160,7 @@ const HomeLayout = () => {
          </aside>
 
          <div className="content">
-            <Outlet context={{state, dispatch}}/>
+            <Outlet context={{ state, dispatch }} />
          </div>
       </div>
    );
