@@ -1,41 +1,65 @@
 import "./createEmployeeStyles.scss";
-import { v4 as uuidv4 } from "uuid";
 import Form from "../components/Form";
-import { useDispatch } from "react-redux";
-import { addEmployee } from "../store/employeeReducer";
 import { useAddEmployeeMutation } from "./employee.api";
-const CreateEmployee = () => {
-   // const { state, dispatch } = useOutletContext();
-   // const dispatch = useDispatch();
-   const [create, { isSuccess }] = useAddEmployeeMutation();
 
-   const add = async(props) => {
-      // props = { ...props, id: uuidv4() };
+import { useEffect, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { notifyError, notifySuccess } from "../utils/toastFns";
+const CreateEmployee = () => {
+   const [create, { isSuccess, isError, data, error }] = useAddEmployeeMutation();
+   const [defaultVal, setDefaultVal] = useState({
+      name: "",
+      email: "",
+      password: "",
+      age: null,
+      date: "",
+      address: "",
+      pincode: null,
+      experience: "",
+      department: "",
+      role: "",
+      status: "",
+   });
+   const navigate = useNavigate();
+   useEffect(() => {
+      if (isError) {
+         error.data.errors.forEach((err) => {
+            notifyError(err);
+         });
+      }
+      if (isSuccess) {
+         notifySuccess(`${defaultVal.name} added successfully !!`);
+         navigate("/employees");
+      }
+   }, [isError, data, error, isSuccess]);
+
+   const add = (props) => {
       const new_employee = {
          name: props.name,
-         email: "sample@gmail.com",
-         age: Number(props.experience),
+         email: props.email,
+         age: Number(props.age),
          role: props.role,
-         password: "sample",
+         password: props.password,
+         experience: props.experience,
+         status: props.status,
          address: {
             line1: props.address,
-            pincode: 679900,
+            pincode: Number(props.pincode),
          },
          department: {
             name: props.department,
          },
       };
-      const response = await create(new_employee);
+      create(new_employee);
+      setDefaultVal(props);
       console.log(`isSucces : ${isSuccess} `);
    };
    return (
       <main className="createEmployee">
          <div className="list">
             <div className="heading">Create Employee</div>
-            <Form
-               defaultVal={{ name: "", date: "", address: "", experience: "", department: "", role: "", status: "" }}
-               handleCreateOrEdit={add}
-            />
+            <Form defaultVal={defaultVal} handleCreateOrEdit={add} />
          </div>
       </main>
    );

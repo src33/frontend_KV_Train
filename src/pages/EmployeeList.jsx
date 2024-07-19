@@ -1,18 +1,19 @@
 import EmployeeDetail from "../components/EmployeeDetail";
 import "./employeeListStyles.scss";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Select from "../components/Select";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { deleteEmployee } from "../store/employeeReducer";
+import { setFilterEmployee } from "../store/employeeReducer";
 import { useDeleteEmployeeMutation, useGetEmployeeListQuery } from "./employee.api";
+import { notifyError, notifySuccess } from "../utils/toastFns";
 
 const EmployeeList = () => {
-   // const {dispatch} = useOutletContext();
-   const [filter, setFilter] = useState("All");
-   // const employees = useSelector((state) => state.employee.list);
+
+   const defFilter=useSelector((state) => state.employee.filter)
+   // console.log(defFilter)
+   const [filter, setFilter] = useState(defFilter); 
    const [list, setList] = useState([]);
-   // const dispatch = useDispatch();
    const { data = [] } = useGetEmployeeListQuery();
 
    useEffect(() => {
@@ -23,19 +24,35 @@ const EmployeeList = () => {
             month: "short",
             year: "numeric",
          }),
-         status: "Active",
-         experience: employee.age,
       }));
-      // console.log()
       setList(employees);
    }, [data]);
+   
+   
+   const dispatch=useDispatch()
+   useEffect(()=>{
+      dispatch(setFilterEmployee(filter))
+   },[filter])
 
    const style = {
       marginLeft: "310px",
       textALign: "center",
    };
 
-   const [deleteEmployee, { isSuccess }] = useDeleteEmployeeMutation();
+   const [deleteEmployee, { isSuccess,isError, error }] = useDeleteEmployeeMutation();
+
+   useEffect(() => {
+      if (isError) {
+         error.data.errors.forEach((err) => {
+            notifyError(err);
+         });
+      }
+      if (isSuccess) {
+         notifySuccess(`Deleted successfully !!`);
+      }
+   }, [isError, error, isSuccess]);
+
+
    const handleDelete = async (value) => {
       console.log(`kityyo ${value.id}`);
 

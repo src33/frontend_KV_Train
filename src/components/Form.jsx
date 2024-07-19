@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const Form = (props) => {
    const [form, setField] = useState(props.defaultVal);
-   // const [changed, setChange] = useState({});
+
    useEffect(() => {
       // console.log(form)
-   }, [form]);
+      setField(props.defaultVal);
+   }, [props.defaultVal]);
    const form_fields = [
       {
          name: "Employee Name",
@@ -22,6 +23,21 @@ const Form = (props) => {
          disabled: "true",
       },
       {
+         id: "email",
+         name: "Email",
+         type: "email",
+      },
+      {
+         id: "age",
+         name: "Age",
+         type: "number",
+      },
+      {
+         id: "password",
+         name: "Password",
+         type: "password",
+      },
+      {
          id: "date",
          name: "Joining Date",
          type: "date",
@@ -29,19 +45,19 @@ const Form = (props) => {
       {
          id: "department",
          name: "Department",
-         values: [{ value: "Production" }, { value: "Design" }, { value: "Management" }],
+         values: [{ value: "Development" }, { value: "Testing" }, { value: "Management" }, { value: "Design" }],
          Component: Select,
       },
       {
          id: "role",
          name: "Role",
-         values: [{ value: "Dev" }, { value: "UI" }],
+         values: [{ value: "UX" }, { value: "UI" }, { value: "HR" }, { value: "Developer" }],
          Component: Select,
       },
       {
          id: "status",
          name: "Status",
-         values: [{ value: "Active" }, { value: "Inactive" }],
+         values: [{ value: "Active" }, { value: "Inactive" }, { value: "Probation" }],
          Component: Select,
       },
       {
@@ -54,6 +70,11 @@ const Form = (props) => {
          name: "Address",
          type: "text",
       },
+      {
+         id: "pincode",
+         name: "Pincode",
+         type: "number",
+      },
    ];
    const handleChange = (changed) => {
       setField((prevState) => {
@@ -62,7 +83,7 @@ const Form = (props) => {
    };
 
    const onCreateOrEdit = (e) => {
-      // e.preventDefault();
+      e.preventDefault();
       // console.log("form");
       props.handleCreateOrEdit(form);
    };
@@ -78,6 +99,7 @@ const Form = (props) => {
                         // ref={fieldRef}
                         label={field.name}
                         values={field.values}
+                        value={props.defaultVal[field.id]}
                         className="fields"
                         onSelect={(value) => handleChange({ [field.id]: value })}
                      />
@@ -89,7 +111,7 @@ const Form = (props) => {
                         label={field.name}
                         type={field.type}
                         className="fields"
-                        value={props.defaultVal.id}
+                        value={props.defaultVal[field.id]}
                         disabled
                      />
                   );
@@ -104,12 +126,12 @@ const Form = (props) => {
                   />
                );
             })}
-         {/* <div className="buttons"> */}
-         <Link to="/employees" className="formButtons">
+         <div className="formButtons">
             <Button text="Create" className="Create" handleClick={onCreateOrEdit} />
-            <Button text="Cancel" className="Cancel" />
-         </Link>
-         {/* </div> */}
+            <Link to="/employees" className="cancelLink">
+               <Button text="Cancel" className="Cancel" />
+            </Link>
+         </div>
       </form>
    );
 };

@@ -122,14 +122,14 @@ const HomeLayout = () => {
          experience: "2 years",
       },
    ];
-   const [state, dispatch] = useReducer(reducer, { employees: employees, filter: "All" });
+   const [state, dispatch] = useReducer(reducer, { filter: "All" });
    useEffect(() => {
       // console.log(localStorage.getItem("token"));
       const token = localStorage.getItem("token");
       if (!token || token === "false") {
          console.log("token Not available");
          navigate("/");
-      } else navigate("/employees");
+      }
    }, []);
 
    return (

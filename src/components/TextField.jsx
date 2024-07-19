@@ -1,30 +1,29 @@
 // import { useEffect, useState } from "react";
+
+import React from "react";
 import { forwardRef, useState } from "react";
 const TextField = forwardRef((props, ref) => {
-   const [disabled, setDisabled] = useState(false);
-   const [defVal, setDefVal] = useState(props.value || "");
-   if (props.disabled === "true") {
-      setDisabled(true);
-   }
+   // const [disabled, setDisabled] = useState(false);
+   const [defVal, setDefVal] = useState(props.value);
+   
    const onChange = (e) => {
-      // setText(e.target.value);
       setDefVal(e.target.value);
-      // console.log(props.disabled);
       if (props.onChange) props.onChange(e.target.value, props.label);
    };
    // console.log(props.disabled)
 
    return (
       <span className={props.className}>
-         <label htmlFor={props.label}>{props.label}</label>
+         <label htmlFor={props.label} data-testid="textFieldLabel-test-id">{props.label}</label>
          <input
             type={props.type}
             ref={ref}
             name={props.label}
-            value={props.disabled ? props.value : defVal}
+            value={defVal || props.value}
             placeholder={props.label}
             onChange={onChange}
-            disabled={disabled}
+            disabled={props.disabled?true:false}
+            data-testid="textField-test-id"
          />
          <label htmlFor="error" className="error_msg">
             {props.error}

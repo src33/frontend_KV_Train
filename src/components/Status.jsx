@@ -6,13 +6,6 @@ const Status = ({ statusVal }) => {
       else return "#ffbfbf";
    };
    return (
-      // <Select
-      //    label=""
-      //    className="Status"
-      //    values={[{ value: "All" }, { value: "Active" }, { value: "Inactive" }, { value: "Probation" }]}
-      //    style={{ backgroundColor: handleStatus() }}
-      //    // onSelect={setFilter}
-      // />
       <div className="status" style={{ backgroundColor: handleStatus() }}>
          {statusVal}
       </div>

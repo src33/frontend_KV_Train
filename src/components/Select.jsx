@@ -1,17 +1,21 @@
-const Select = (props) => {
-   const onSelect = (e) => {
+import { useState } from "react";
+
+const Select = ({value,label,className,values,onSelect}) => {
+   const [defVal,setDefVal]=useState("default")
+   const handleSelect = (e) => {
       // setText(e.target.value);
-      if (props.onSelect) props.onSelect(e.target.value, props.label);
+      setDefVal(e.target.value)
+      if (onSelect) onSelect(e.target.value, label);
    };
+   console.log(value)
    return (
-      <span className={props.className}>
-         <label htmlFor={props.label}> {props.label} </label>
-         <select required defaultValue="default" onChange={onSelect}>
+      <span className={className}>
+         <label htmlFor={label}> {label} </label>
+         <select required defaultValue={value || defVal} onChange={handleSelect}>
             <option value="default" disabled>
-               {props.className}
+               {label}
             </option>
-            {props.values.map((element) => {
-               // console.log(element.value)
+            {values.map((element) => {
                return (
                   <option key={element.value} value={element.value}>
                      {element.value}
@@ -23,3 +27,5 @@ const Select = (props) => {
    );
 };
 export default Select;
+
+

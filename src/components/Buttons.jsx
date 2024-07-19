@@ -1,10 +1,7 @@
+import React from "react";
 const Button = (props) => {
-   //   props.handleClick = (e) => {
-   //       console.log(e.target.value);
-   //       console.log("njekkiii");
-   //    };
    return (
-      <button className={props.className} onClick={props.handleClick}>
+      <button className={props.className} onClick={props.handleClick} data-testid="button-test-id">
          {props.text}
       </button>
    );

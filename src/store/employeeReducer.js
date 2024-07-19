@@ -2,7 +2,8 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const addEmployee = createAction("ADD_EMPLOYEE");
 const deleteEmployee = createAction("DELETE_EMPLOYEE");
-const editEmployee= createAction("EDIT_EMPLOYEE")
+const editEmployee = createAction("EDIT_EMPLOYEE");
+const setFilterEmployee = createAction("SET_FILTER_EMPLOYEE");
 
 const employees = [
    {
@@ -118,19 +119,22 @@ const employees = [
       experience: "2 years",
    },
 ];
-const employeeReducer = createReducer({ list: employees }, (builder) => {
-   builder.addCase(addEmployee, (state, action) => {
-      state.list.push(action.payload);
-   });
-   builder.addCase(deleteEmployee, (state, action) => {
-    // console.log("reduceril ethii")
-      state.list=state.list.filter((employee) => employee.id !== action.payload);
-   });
-   builder.addCase(editEmployee, (state, action) => {
-    // console.log("reduceril ethii")
-      state.list=state.list.map((employee) =>
-        employee.id === action.payload.id ? action.payload : employee)
+const employeeReducer = createReducer({ filter: "All" }, (builder) => {
+   // builder.addCase(addEmployee, (state, action) => {
+   //    state.list.push(action.payload);
+   // });
+   // builder.addCase(deleteEmployee, (state, action) => {
+   //  // console.log("reduceril ethii")
+   //    state.list=state.list.filter((employee) => employee.id !== action.payload);
+   // });
+   // builder.addCase(editEmployee, (state, action) => {
+   //  // console.log("reduceril ethii")
+   //    state.list=state.list.map((employee) =>
+   //      employee.id === action.payload.id ? action.payload : employee)
+   // });
+   builder.addCase(setFilterEmployee, (state, action) => {
+      state.filter = action.payload;
    });
 });
 
-export { employeeReducer as default, addEmployee,deleteEmployee,editEmployee };
+export { employeeReducer as default, addEmployee, deleteEmployee, editEmployee, setFilterEmployee };

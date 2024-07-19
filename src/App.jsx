@@ -8,9 +8,10 @@ import HomeLayout from "./layouts/HomeLayout";
 import EmployeeList from "./pages/EmployeeList";
 import EditEmployee from "./pages/EditEmployee";
 import EmployeeDetailsPage from "./pages/EmployeeDetailsPage";
-import DeletePopup from "./components/DeletePopup";
 import store from "./store/store";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
    const router = createBrowserRouter([
       {
@@ -31,12 +32,19 @@ const App = () => {
    ]);
 
    return (
+      
       <Provider store={store}>
       <main className="App">
          <RouterProvider router={router} />
          {/* {stateValue ? <CreateEmployee /> : <Login handleSubmit={handleClick} />} */}
       </main>
+      <ToastContainer limit={4}
+      style={{
+         '--toastify-color-success':"#9ffd64ee",
+         '--toastify-color-error':"#ff5353ef",
+      }}/>
       </Provider>
+       
    );
 };
 export default App;

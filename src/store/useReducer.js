@@ -2,7 +2,7 @@ const actionTypes = {
    ADD_EMPLOYEE: "ADD_EMPLOYEE",
    DELETE_EMPLOYEE: "DELETE_EMPLOYEE",
    EDIT_EMPLOYEE: "EDIT_EMPLOYEE",
-   FILTER_EMPLOYEE: "FILTER_EMPLOYEE",
+   SET_FILTER: "SET_FILTER",
 };
 
 const reducer = (state, action) => {
@@ -25,11 +25,11 @@ const reducer = (state, action) => {
                employee.id === action.payload.id ? action.payload : employee
             ),
          };
-         // case actionTypes.FILTER_EMPLOYEE:
-         //    return{
-         //       ...state,
-         //       employees: state.employees.filter((employee) => (employee.status === action.payload))
-         //    }
+      case actionTypes.SET_FILTER:
+         return {
+            ...state,
+            filter: action.payload,
+         };
       default:
          return state;
    }

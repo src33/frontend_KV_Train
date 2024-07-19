@@ -52,8 +52,8 @@
          height: 40px;
          background-color: #fafafa;
       }
-      .fields input:disabled{
-        background-color: #6b61619f;
+      .fields input:disabled {
+         background-color: #6b61619f;
       }
       .fields {
          display: flex;
@@ -78,9 +78,11 @@
          width: 100%;
          text-decoration: none;
       }
+      .cancelLink {
+         width: 11%;
+      }
       .Create,
       .Cancel {
-         width: 11%;
          height: 40px;
          margin-right: 10px;
          border-radius: 5px;
@@ -88,12 +90,14 @@
          font-size: 15px;
       }
       .Create {
+         width: 11%;
          background-color: #03aeee;
          border: #03aeee;
          box-shadow: 1px 1px 1px 1px #03aeee;
          color: white;
       }
       .Cancel {
+         width: 100%;
          background-color: white;
          border: 1px solid #b1b1b1;
          box-shadow: 0.5px 0.5px 2px 0.5px #ccc;
